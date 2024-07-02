@@ -28,7 +28,10 @@ logging:
         mapper: debug
         service: info
         controller: info
-
+#用于打印框架生成的sql语句，便于调试
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 sky:
   jwt:
     # 设置jwt签名加密时使用的秘钥
