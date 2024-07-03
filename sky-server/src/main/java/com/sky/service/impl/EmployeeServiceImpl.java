@@ -105,7 +105,25 @@ public class EmployeeServiceImpl
         return Result.success(pageResult);
     }
 
+    @Override
+    public void updateEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        Employee temp = employeeMapper.selectById(employeeDTO.getId());
+        if(temp != null) {
+            //如果修改员工存在在修改
 
+            //修改信息
+            BeanUtils.copyProperties(employeeDTO, employee);
+            //修改  修改时间和修改人
+            employee.setUpdateTime(LocalDateTime.now());
+            employee.setUpdateUser(BaseContext.getCurrentId());
+
+            //保存修改
+            super.saveOrUpdate(employee);
+        }
+
+
+    }
 
 
 }

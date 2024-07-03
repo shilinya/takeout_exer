@@ -33,4 +33,9 @@ public interface EmployeeService extends IService<Employee> {
     Result<PageResult> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
 
+    /**
+     * 根据DIO修改员工信息
+     * @param employeeDTO
+     */
+    void updateEmployee(EmployeeDTO employeeDTO);
 }

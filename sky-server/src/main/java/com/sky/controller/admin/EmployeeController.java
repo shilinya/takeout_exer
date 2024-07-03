@@ -44,7 +44,7 @@ public class EmployeeController {
     @ApiOperation(value = "员工登录接口")
     @PostMapping("/login")
     public Result<EmployeeLoginVO> login(@RequestBody EmployeeLoginDTO employeeLoginDTO) {
-        log.info("员工登录：{}", employeeLoginDTO);
+
 
         Employee employee = employeeService.login(employeeLoginDTO);
 
@@ -112,6 +112,30 @@ public class EmployeeController {
 
         employeeService.update(wrapper);
         }
+        return Result.success();
+    }
+
+    /**
+     * 根据员工id查询员工信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根据员工id查询员工信息")
+    public Result<Employee> getById(@PathVariable Long id) {
+        Employee result = employeeService.getById(id);
+        return Result.success(result);
+    }
+
+    /**
+     * 编辑员工信息4
+     * @param employeeDTO
+     * @return
+     */
+    @PutMapping
+    @ApiOperation("编辑员工信息")
+    public Result updateEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        employeeService.updateEmployee(employeeDTO);
         return Result.success();
     }
 
