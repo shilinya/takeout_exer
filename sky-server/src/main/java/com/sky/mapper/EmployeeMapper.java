@@ -9,10 +9,11 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
-public interface EmployeeMapper  extends BaseMapper<Employee> {
+public interface EmployeeMapper extends BaseMapper<Employee> {
 
     /**
      * 根据用户名查询员工
+     *
      * @param username
      * @return
      */
@@ -21,6 +22,7 @@ public interface EmployeeMapper  extends BaseMapper<Employee> {
 
     /**
      * 分页查询
+     *
      * @param employeePageQueryDTO
      * @return
      */
