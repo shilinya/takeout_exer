@@ -81,6 +81,18 @@ public class DishController {
         return Result.success();
     }
 
+    /**
+     * 菜品起售停售
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    public Result updateStatus(@PathVariable Integer status,@RequestParam Long id){
+        dishService.updateStatus(status,id);
+        return Result.success();
+    }
+
 
 
 
