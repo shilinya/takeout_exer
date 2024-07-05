@@ -94,6 +94,17 @@ public class DishController {
     }
 
 
+    /**
+     * 根据分类的id查询该分类下的菜品
+     * @return
+     */
+    @GetMapping("/list")
+    public Result<List<Dish>> list(@RequestParam(value = "categoryId") Long id){
+       List<Dish>result= dishService.getDishesByCategoryId(id);
+       return Result.success(result);
+    }
+
+
 
 
 }
