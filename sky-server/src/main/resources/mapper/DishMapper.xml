@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.mapper.DishMapper">
+
+    <resultMap id="dishVoMap" type="com.sky.vo.DishVO" autoMapping="true">
+        <id property="id" column="id"/>
+        <collection property="flavors" ofType="com.sky.entity.DishFlavor"
+                    select="listDishFlavor" autoMapping="true" column="id"/>
+    </resultMap>
+
+
+    <select id="pageDish" resultMap="dishVoMap">
+        select di.id,
+               di.name,
+               category_id,
+               price,
+               image,
+               description,
+               di.status,
+               di.update_time,
+               ca.name categoryName
+        from dish  di
+        left join category ca
+        on di.category_id = ca.id
+        <where>
+            <if test="name!=null and name!=''">
+                and di.name like concat('%',#{name},'%')
+            </if>
+            <if test="categoryId!=null">
+                and di.category_id=#{categoryId}
+            </if>
+            <if test="status!=null">
+                and di.status=#{status}
+            </if>
+        </where>
+        order by di.update_time desc
+    </select>
+    <select id="listDishFlavor" resultType="com.sky.entity.DishFlavor">
+        select *
+        from dish_flavor
+        where dish_id=#{id}
+    </select>
+
+
+    <select id="getDishVoById" resultMap="dishVoMap">
+        select di.id,
+        di.name,
+        category_id,
+        price,
+        image,
+        description,
+        di.status,
+        di.update_time,
+        ca.name categoryName
+        from dish  di
+        left join category ca
+        on di.category_id = ca.id
+        where di.id=#{id}
+    </select>
+    <select id="list" resultType="com.sky.entity.Dish">
+            select * from dish
+            <where>
+                <if test="name != null">
+                    and name like concat('%',#{name},'%')
+                </if>
+                <if test="categoryId != null">
+                    and category_id = #{categoryId}
+                </if>
+                <if test="status != null">
+                    and status = #{status}
+                </if>
+            </where>
+            order by create_time desc
+
+    </select>
+</mapper>
