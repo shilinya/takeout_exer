@@ -50,7 +50,7 @@ sky:
     user-token-name: authentication
   wechat:
     appid: wx0851b0c2297b441d
-    secret: 277fa0c357853ed510eedae06c4909c1
+    secret:
 
 minio:
   endpoint: http://192.168.170.10:9000
