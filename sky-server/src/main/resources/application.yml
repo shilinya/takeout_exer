@@ -50,7 +50,12 @@ sky:
     user-token-name: authentication
   wechat:
     appid: wx0851b0c2297b441d
-    secret:
+    secret: 277fa0c357853ed510eedae06c4909c1
+#    notify-url: https://58869fb.r2.cpolar.top/notify/paySuccess
+  shop:
+    address: 黑龙江省哈尔滨市南岗区哈尔滨工程大学
+  baidu:
+    ak: A7nlca63ZQbWh3FIEF0yaI0NwgeOYFUa
 
 minio:
   endpoint: http://192.168.170.10:9000

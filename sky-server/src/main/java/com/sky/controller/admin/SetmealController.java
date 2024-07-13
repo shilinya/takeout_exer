@@ -11,6 +11,7 @@ import com.sky.service.SetmealService;
 import com.sky.vo.SetmealVO;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,6 +51,7 @@ public class SetmealController {
      * @param setmealDTO
      * @return
      */
+    @CacheEvict(cacheNames = "setmealCache",key = "#setmealDTO.categoryId")
     @PostMapping
     public Result addSetmeal(@RequestBody SetmealDTO setmealDTO){
         setmealService.addSetmeal(setmealDTO);
@@ -62,6 +64,7 @@ public class SetmealController {
      * @return
      */
     @PutMapping
+    @CacheEvict(cacheNames = "setmealCache",allEntries = true)
     public Result updateSetmeal(@RequestBody SetmealDTO setmealDTO){
         setmealService.updateSetmeal(setmealDTO);
         return Result.success();
@@ -73,6 +76,7 @@ public class SetmealController {
      * @return
      */
     @PostMapping("/status/{status}")
+    @CacheEvict(cacheNames = "setmealCache",allEntries = true)
     public Result updateSetmealStatus(@PathVariable String status,Long id){
         LambdaUpdateWrapper<Setmeal> wrapper = new LambdaUpdateWrapper<>();
         wrapper.eq(Setmeal::getId,id).set(Setmeal::getStatus,status);
@@ -86,6 +90,7 @@ public class SetmealController {
      * @return
      */
     @DeleteMapping
+    @CacheEvict(cacheNames = "setmealCache",allEntries = true)//删除所有缓存数据
     public Result deleteSetmeal(@RequestParam List<Long> ids){
         setmealService.deleteBatch(ids);
         return Result.success();

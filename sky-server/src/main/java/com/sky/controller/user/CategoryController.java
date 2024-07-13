@@ -30,7 +30,7 @@ public class CategoryController {
     @GetMapping("/list")
     @ApiOperation("查询分类")
     public Result<List<Category>> list(Integer type) {
-        List<Category> list=new ArrayList<>();
+        List<Category> list;
         if (type!=null) {
             LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<>();
             wrapper.eq(Category::getType, type);

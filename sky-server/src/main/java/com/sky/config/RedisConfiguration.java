@@ -19,7 +19,7 @@ public class RedisConfiguration {
         redisTemplate.setConnectionFactory(connectionFactory);
         //设置redis key的序列化器
         redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer( new GenericJackson2JsonRedisSerializer());
+//        redisTemplate.setValueSerializer( new GenericJackson2JsonRedisSerializer());
         return redisTemplate;
     }
 }

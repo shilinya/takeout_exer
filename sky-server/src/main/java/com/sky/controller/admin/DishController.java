@@ -12,9 +12,11 @@ import com.sky.vo.DishVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @Api(tags = "菜品相关接口")
@@ -22,6 +24,8 @@ import java.util.List;
 public class DishController {
     @Autowired
     private DishService dishService;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 新增菜品
@@ -32,6 +36,9 @@ public class DishController {
     @PostMapping
     public Result save(@RequestBody DishDTO dishDTO) {
         dishService.saveDish(dishDTO);
+        String key="dish"+dishDTO.getCategoryId();
+        cleanCache(key) ;
+
         return Result.success();
     }
 
@@ -56,6 +63,7 @@ public class DishController {
     @ApiOperation("菜品的批量删除")
     public Result deleteDishes(@RequestParam List<Long> ids){
         dishService.deleteBatch(ids);
+        cleanCache("dish*");
         return Result.success();
     }
 
@@ -78,6 +86,7 @@ public class DishController {
     @PutMapping
     public Result updateDish(@RequestBody DishDTO dishDTO){
         dishService.updateDish(dishDTO);
+        cleanCache("dish*");
         return Result.success();
     }
 
@@ -90,6 +99,7 @@ public class DishController {
     @PostMapping("/status/{status}")
     public Result updateStatus(@PathVariable Integer status,@RequestParam Long id){
         dishService.updateStatus(status,id);
+        cleanCache("dish*");
         return Result.success();
     }
 
@@ -104,7 +114,10 @@ public class DishController {
        return Result.success(result);
     }
 
-
+    private void cleanCache(String pattern){
+        Set keys=redisTemplate.keys(pattern);
+        redisTemplate.delete(keys);
+    }
 
 
 }

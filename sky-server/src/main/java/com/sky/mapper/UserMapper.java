@@ -4,6 +4,8 @@ package com.sky.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.sky.entity.User;
 
+import java.util.Map;
+
 /**
 * @author 灵均
 * @description 针对表【user(用户信息)】的数据库操作Mapper
@@ -12,6 +14,13 @@ import com.sky.entity.User;
 */
 public interface UserMapper extends BaseMapper<User> {
 
+
+    /**
+     * 根据条件动态查询用户数据
+     * @param map
+     * @return
+     */
+    Integer countByMap(Map map);
 }
 
 
