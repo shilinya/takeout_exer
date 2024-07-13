@@ -8,6 +8,7 @@ import com.sky.entity.Dish;
 import com.sky.vo.DishVO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
 * @author 灵均
@@ -33,6 +34,8 @@ public interface DishMapper extends BaseMapper<Dish> {
     DishVO getDishVoById(Long id);
 
     List<Dish> list(Dish dish);
+
+    Integer countByMap(Map map);
 }
 
 

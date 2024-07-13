@@ -33,7 +33,7 @@ public interface OrdersMapper extends BaseMapper<Orders> {
      * @param map
      * @return
      */
-    Double sumByMap(HashMap map);
+    Double sumByMap(Map map);
 
     /**
      * 根据条件动态查询订单

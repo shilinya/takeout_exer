@@ -9,6 +9,7 @@ import com.sky.vo.DishItemVO;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 /**
 * @author 灵均
@@ -35,7 +36,10 @@ public interface SetmealMapper extends BaseMapper<Setmeal> {
     @Select("select sd.name, sd.copies, d.image, d.description " +
             "from setmeal_dish sd left join dish d on sd.dish_id = d.id " +
             "where sd.setmeal_id = #{setmealId}")
-    List<DishItemVO> getDishItemBySetmealId(Long setmealId);}
+    List<DishItemVO> getDishItemBySetmealId(Long setmealId);
+
+    Integer countByMap(Map map);
+}
 
 
 
